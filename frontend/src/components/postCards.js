@@ -1,10 +1,12 @@
 import React from 'react';  
 import {Card,Button} from 'react-bootstrap';
+import logo from '../images/logo.png';
 
-export default function postCards(){
+export default function postCards(props){
+    console.log(props.post);
     return(
-            <Card style={{width:"18rem" }} >
-                <Card.Img variant="top" src="#"/>
+            <Card>
+                <Card.Img variant="top" src={logo} alt={"none"}/>
                 <Card.Body>
                     <Card.Title>Card Title</Card.Title>
                     <Card.Text>

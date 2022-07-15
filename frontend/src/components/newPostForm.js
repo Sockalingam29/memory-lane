@@ -32,7 +32,7 @@ export default function newPostForm(){
 
                 <Form.Group className="mb-3" controlId="postAuthor">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your name" value={postData['name']} onChange = {
+                    <Form.Control type="text" placeholder="Enter your name" value={postData['author']} onChange = {
                         (e) => setPostData({
                             ...postData,
                             author: e.target.value
