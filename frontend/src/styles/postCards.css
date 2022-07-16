@@ -1,0 +1,17 @@
+.card-img, .card-img-bottom, .card-img-top{
+    height:15rem;
+    object-fit:cover;
+}
+.card-img-overlay{
+    height:15rem;
+}
+
+.cardAction{
+    display:flex;
+    justify-content:space-between;
+}
+.actionBtn{
+    width:20px;
+    cursor: pointer;
+    vertical-align:baseline;
+}

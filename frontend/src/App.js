@@ -7,7 +7,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 
 function App() {
   return (
-    <>
+    <div style={{background:"#7D9D9C"}}>
       <NavbarMenu/>
 
       <Container fluid >
@@ -21,7 +21,7 @@ function App() {
       </Row>
     </Container>
 
-    </>
+    </div>
   );
 }
 
