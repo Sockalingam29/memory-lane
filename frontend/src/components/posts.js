@@ -10,7 +10,7 @@ export default function posts(){
       const fetchData = async () => {
         try{
             const postsData = await fetchPosts();
-            setPosts(postsData.data);
+            setPosts(postsData.data.reverse());
         }catch(err){
             console.log("Error"+err);
         }
@@ -21,17 +21,14 @@ export default function posts(){
     return(
         <Container fluid>
             <Row>
-                <Col className="mb-3" xs={12} md={6} lg={4}>
-                    <PostCard />
-                </Col>
-                <Col xs={12} md={6} lg={4}>
-                    <PostCard />
-                </Col>
-                <Col xs={12} md={6} lg={4}>
-                    <PostCard />
-                </Col>
+                {posts.map((data)=>{
+                    return(
+                        <Col key={data._id} className="mb-3" xs={12} md={6} lg={6}>
+                            <PostCard {...data} />
+                        </Col>
+                    )
+                })}
             </Row>
-            {console.log(posts[0])}
         </Container>
     )
 }

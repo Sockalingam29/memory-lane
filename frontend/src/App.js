@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import NewPostForm from './components/newPostForm';
 import Posts from './components/posts';
 import NavbarMenu from './components/navbar';
@@ -7,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 
 function App() {
   return (
-    <>
+    <div style={{background:"#7D9D9C"}}>
       <NavbarMenu/>
 
       <Container fluid >
@@ -21,7 +20,7 @@ function App() {
       </Row>
     </Container>
 
-    </>
+    </div>
   );
 }
 
