@@ -13,7 +13,6 @@ export default function newPostForm(){
     const handleSubmit =  (e) => {
         createPost(postData);
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
-        fetchPosts();
     }
 
     return(
