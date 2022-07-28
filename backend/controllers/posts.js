@@ -54,7 +54,6 @@ export const likePost = async (req,res) =>{
         const {id}=req.params;
         const post =await Post.findById(id);
         await Post.findByIdAndUpdate(id,{noOfLikes:post.noOfLikes+1},{new:true});
-        console.log(post.noOfLikes);
         res.status(200).json({
             message:"Post liked successfully",
             success:"true"

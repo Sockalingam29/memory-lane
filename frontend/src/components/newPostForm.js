@@ -60,7 +60,7 @@ export default function newPostForm(){
                 </Form.Group>
                 
                 <Form.Group className="mb-2" controlId="postImage">
-                    <Form.Label>Upload</Form.Label>
+                    <Form.Label>Upload (Max 200KB)</Form.Label>
                     <FileBase 
                         type='file'
                         multiple={false}
