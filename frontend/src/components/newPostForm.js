@@ -10,8 +10,9 @@ export default function newPostForm(){
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 
-    const handleSubmit =  (e) => {
-        createPost(postData);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createPost(postData)
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 

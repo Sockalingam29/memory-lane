@@ -4,9 +4,9 @@ const url = 'https://memories-mern-appln.herokuapp.com/posts/';
 
 export const fetchPosts = () => axios.get(url);
 
-export const createPost = (post) =>{ 
+export const createPost = async (post) =>{ 
     console.log(post);
-    axios. post(url,post)
+    await axios. post(url,post)
     .then(res => console.log(res.status))
     .catch(err => console.log(err));
 };
