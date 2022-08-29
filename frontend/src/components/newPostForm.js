@@ -60,14 +60,16 @@ export default function newPostForm(){
                     } />
                 </Form.Group>
                 
-                <Form.Group className="mb-2" controlId="postImage">
-                    <Form.Label>Upload (Max 200KB)</Form.Label>
+                {/* <Form.Group className="mb-2" controlId="postImage">
+                    <Form.Label>Upload (Max 20KB)</Form.Label>
                     <FileBase 
                         type='file'
                         multiple={false}
+                        maxSize='200Kb'
                         onDone={({base64})=> setPostData({...postData, selectedFile:base64})}
+                        
                     />   
-                </Form.Group>
+                </Form.Group> */}
                 
                 <Button className="w-100 mb-2" variant="dark" type="submit">
                     Submit

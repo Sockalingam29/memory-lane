@@ -3,7 +3,7 @@ import {Card,Badge} from 'react-bootstrap';
 import likeIcon from '../images/like.png';
 import deleteIcon from '../images/garbage.png';
 import '../styles/postCards.css';
-import editingIcon from '../images/editing.png';
+import placeholder from '../images/placeholder.jpg';
 import {deletePost,likePost} from '../api/index';
 
 export default function postCards(props){
@@ -27,7 +27,7 @@ export default function postCards(props){
                     <Card.Text>{props.currPost.author}</Card.Text>
                     {/* <div><img src={editingIcon} alt="Edit" className="actionBtn" /></div> */}
                 </Card.ImgOverlay>  
-                <Card.Img variant="top" src={props.currPost.selectedFile} alt={"Cover image"} />
+                <Card.Img variant="top" src={placeholder} alt={"Cover image"} />
             
                 <Card.Body>
                     <Card.Title>
