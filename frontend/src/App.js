@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 
 function App() {
   return (
-    <div style={{background:"#7D9D9C"}}>
+    <div style={{background:"#CFD2CF"}}>
       <NavbarMenu/>
 
       <Container fluid >

@@ -22,7 +22,7 @@ export default function postCards(props){
     }
 
     return(
-            <Card style={{background:"#D3CEDF",boxShadow:"20px"}}>
+            <Card style={{background:"",boxShadow:"20px"}}>
                 <Card.ImgOverlay className="cardAction">
                     <Card.Text>{props.currPost.author}</Card.Text>
                     {/* <div><img src={editingIcon} alt="Edit" className="actionBtn" /></div> */}

@@ -4,7 +4,7 @@ import logo from '../images/logo.png';
 
 export default function navbar(){
     return(
-        <Navbar bg="dark" variant="dark" className="mb-5">
+        <Navbar bg="dark" variant="dark" className="mb-4">
         <Container>
           <Navbar.Brand href="#">
             <img
