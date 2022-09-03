@@ -1,19 +1,22 @@
-import React,{useState} from 'react';  
+import React,{useState, useSelector} from 'react';  
 import FileBase from 'react-file-base64';
 import {createPost, fetchPosts} from '../api/index';
 import {Button,Form} from 'react-bootstrap';
+import {useDispatch} from 'react-redux';
 
-export default function newPostForm(){
+export default function newPostForm({currentId, setCurrentId}){
     const [postData, setPostData] = useState({title:'',content:'',author:'',tags:[],selectedFile:''});
+    const dispatch = useDispatch();  
 
     const clear = () =>{
+        setCurrentId(0);
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createPost(postData)
-        setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
+        dispatch(createPost(postData));
+        clear();
     }
 
     return(

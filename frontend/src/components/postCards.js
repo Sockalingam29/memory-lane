@@ -4,22 +4,25 @@ import likeIcon from '../images/like.png';
 import deleteIcon from '../images/garbage.png';
 import '../styles/postCards.css';
 import placeholder from '../images/placeholder.jpg';
-import {deletePost,likePost} from '../api/index';
+import {useDispatch} from 'react-redux';
+import { likePost, deletePost } from '../actions/posts';
 
 export default function postCards(props){
-    const deleteHandler = () =>{
-        deletePost(props.currPost._id)
-        props.setPosts(props.allPosts.filter((val)=>{
-            return val._id!=props.currPost._id;
-        }));
-    }
+    const dispatch = useDispatch();
 
-    const likeHandler = () =>{
-        likePost(props.currPost._id)
-        props.setPosts(props.allPosts.map((val)=>{
-            return val._id==props.currPost._id ? {...val,noOfLikes:val.noOfLikes+1} : val
-        }));
-    }
+    // const deleteHandler = () =>{
+    //     deletePost(props.currPost._id)
+    //     props.setPosts(props.allPosts.filter((val)=>{
+    //         return val._id!=props.currPost._id;
+    //     }));
+    // }
+
+    // const likeHandler = () =>{
+    //     likePost(props.currPost._id)
+    //     props.setPosts(props.allPosts.map((val)=>{
+    //         return val._id==props.currPost._id ? {...val,noOfLikes:val.noOfLikes+1} : val
+    //     }));
+    // }
 
     return(
             <Card style={{background:"",boxShadow:"20px"}}>
@@ -43,11 +46,11 @@ export default function postCards(props){
                     </Card.Text>
                     <Card.Text className='cardAction'>
                     <div>
-                        <img className="actionBtn" alt="Like" src={likeIcon} onClick={likeHandler}/>
+                        <img className="actionBtn" alt="Like" src={likeIcon} onClick={() => dispatch(likePost(props.currPost._id))}/>
                         <small>{' '}{props.currPost.noOfLikes}</small>
                     </div>
                     <div>
-                        <img className='actionBtn' onClick={deleteHandler} alt="Delete" src={deleteIcon}/>
+                        <img className='actionBtn' onClick={() => dispatch(deletePost(props.currPost._id))} alt="Delete" src={deleteIcon}/>
                     </div>
                     </Card.Text>
                 </Card.Body>
