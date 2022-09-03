@@ -13,16 +13,13 @@ export const getPosts = async (req,res)=>{
 }
 
 export const createPost=async (req,res)=>{
-    try {
+   
         const { title, content, author, tags, selectedFile} = req.body;
 
         const newPost = new Post({ title, content, author, tags, selectedFile })
-    
+    try {
         await newPost.save();
-        return res.status(201).json({
-            message: "Post created successfully",
-            success:"true"
-        });
+        return res.status(201).json({newPost});
     } catch (error) {
         return res.status(500).json({
             message: "Error creating post - " + error ,
@@ -53,11 +50,22 @@ export const likePost = async (req,res) =>{
     try{
         const {id}=req.params;
         const post =await Post.findById(id);
-        await Post.findByIdAndUpdate(id,{noOfLikes:post.noOfLikes+1},{new:true});
-        res.status(200).json({
-            message:"Post liked successfully",
-            success:"true"
+        const updatedPost=await Post.findByIdAndUpdate(id,{noOfLikes:post.noOfLikes+1},{new:true});
+        res.status(200).json({updatedPost})
+    }catch(err){
+        res.status(500).json({
+            message:err,
+            success:"false"
         });
+    }
+}
+
+export const updatePost = async (req,res) =>{
+    try{
+        const {id}=req.params;
+        const {title,content,author,tags,selectedFile}=req.body;
+        const updatedPost=await Post.findByIdAndUpdate(id,{title,content,author,tags,selectedFile},{new:true});
+        res.status(200).json({updatedPost})
     }catch(err){
         res.status(500).json({
             message:err,
