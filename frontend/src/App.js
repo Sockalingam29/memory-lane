@@ -15,7 +15,7 @@ function App() {
   }, [currentId, dispatch]);
 
   return (
-    <div style={{background:"#CFD2CF"}}>
+    <div style={{background:"#CFD2CF",minHeight:"100vh"}}>
       <NavbarMenu/>
 
       <Container fluid >
