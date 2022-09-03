@@ -1,11 +1,20 @@
-import React,{useState} from 'react';  
+import React,{useState, useEffect} from 'react';  
 import FileBase from 'react-file-base64';
-import { createPost } from '../actions/posts';
+import { createPost, updatePost } from '../actions/posts';
 import {Button,Form} from 'react-bootstrap';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 export default function newPostForm({currentId, setCurrentId}){
+    
     const [postData, setPostData] = useState({title:'',content:'',author:'',tags:[],selectedFile:''});
+    const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+
+    useEffect(() => {
+        console.log("useEffect");
+        console.log(post);
+        if (post) setPostData(post);
+      }, [post]);
+
     const dispatch = useDispatch();  
 
     const clear = () =>{
@@ -13,10 +22,14 @@ export default function newPostForm({currentId, setCurrentId}){
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         console.log(postData);
-        await dispatch(createPost(postData));
+        if(currentId === 0)
+        dispatch(createPost(postData));
+        else{
+            dispatch(updatePost(postData._id,postData));
+        }
         clear();
     }
 

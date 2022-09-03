@@ -2,6 +2,7 @@ import React from 'react';
 import {Card,Badge} from 'react-bootstrap';
 import likeIcon from '../images/like.png';
 import deleteIcon from '../images/garbage.png';
+import editIcon from '../images/editing.png';
 import '../styles/postCards.css';
 import placeholder from '../images/placeholder.jpg';
 import {useDispatch} from 'react-redux';
@@ -14,7 +15,7 @@ export default function postCards({currPost, setCurrentId}){
             <Card style={{background:"",boxShadow:"20px"}}>
                 <Card.ImgOverlay className="cardAction">
                     <Card.Text>{currPost.author}</Card.Text>
-                    {/* <div><img src={editingIcon} alt="Edit" className="actionBtn" /></div> */}
+                    <div onClick={()=>setCurrentId(currPost._id)}><img src={editIcon} alt="Edit" className="actionBtn" /></div>
                 </Card.ImgOverlay>  
                 <Card.Img variant="top" src={placeholder} alt={"Cover image"} />
             

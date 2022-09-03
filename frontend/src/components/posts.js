@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 export default function posts({setCurrentId}){
     const posts = useSelector((state) => state.posts);
-
+    
 
     return(
         <Container fluid>

@@ -59,3 +59,17 @@ export const likePost = async (req,res) =>{
         });
     }
 }
+
+export const updatePost = async (req,res) =>{
+    try{
+        const {id}=req.params;
+        const {title,content,author,tags,selectedFile}=req.body;
+        const updatedPost=await Post.findByIdAndUpdate(id,{title,content,author,tags,selectedFile},{new:true});
+        res.status(200).json({updatedPost})
+    }catch(err){
+        res.status(500).json({
+            message:err,
+            success:"false"
+        });
+    }
+}
