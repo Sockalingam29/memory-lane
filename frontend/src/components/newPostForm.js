@@ -36,10 +36,10 @@ export default function newPostForm({currentId, setCurrentId}){
     return(
         <div>
             <h2>Add your memory!</h2>
-            <Form onSubmit={handleSubmit} autoComplete='off'>
-                <Form.Group className="mb-2" controlId="postTitle">
+            <Form onSubmit={handleSubmit} autoComplete="new-password">
+                <Form.Group  className="mb-2" controlId="postTitle">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control type="text"  placeholder="Enter title" value={postData['title']} onChange = {
+                    <Form.Control autoComplete="new-password" type="text"  placeholder="Enter title" value={postData['title']} onChange = {
                         (e) => setPostData({
                             ...postData,
                             title: e.target.value
@@ -49,7 +49,7 @@ export default function newPostForm({currentId, setCurrentId}){
 
                 <Form.Group className="mb-2" controlId="postAuthor">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter your name" value={postData['author']} onChange = {
+                    <Form.Control autoComplete="new-password" type="text" placeholder="Enter your name" value={postData['author']} onChange = {
                         (e) => setPostData({
                             ...postData,
                             author: e.target.value
@@ -69,7 +69,7 @@ export default function newPostForm({currentId, setCurrentId}){
                 
                 <Form.Group className="mb-2" controlId="postTags">
                     <Form.Label>Tags</Form.Label>
-                    <Form.Control type="text" placeholder="Enter tags" value={postData['tags']} onChange = {
+                    <Form.Control autoComplete="new-password" type="text" placeholder="Enter tags" value={postData['tags']} onChange = {
                         (e) => setPostData({
                             ...postData,
                             tags: e.target.value.split(',')
