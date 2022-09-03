@@ -1,6 +1,6 @@
-import React,{useState, useSelector} from 'react';  
+import React,{useState} from 'react';  
 import FileBase from 'react-file-base64';
-import {createPost, fetchPosts} from '../api/index';
+import { createPost } from '../actions/posts';
 import {Button,Form} from 'react-bootstrap';
 import {useDispatch} from 'react-redux';
 
@@ -13,9 +13,10 @@ export default function newPostForm({currentId, setCurrentId}){
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(createPost(postData));
+        console.log(postData);
+        await dispatch(createPost(postData));
         clear();
     }
 
