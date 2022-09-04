@@ -17,7 +17,7 @@ export default function postCards({currPost, setCurrentId}){
                     <Card.Text>{currPost.author}</Card.Text>
                     <div onClick={()=>setCurrentId(currPost._id)}><img src={editIcon} alt="Edit" className="actionBtn" /></div>
                 </Card.ImgOverlay>  
-                <Card.Img variant="top" src={placeholder} alt={"Cover image"} />
+                <Card.Img variant="top" src={currPost.selectedFile} alt={"Cover image"} />
             
                 <Card.Body>
                     <Card.Title>
