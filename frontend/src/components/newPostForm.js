@@ -22,14 +22,11 @@ export default function newPostForm({currentId, setCurrentId}){
         setPostData({title:'',content:'',author:'',tags:[],selectedFile:''});
     }
 
-    const handleSubmit =  (e) => {
+    const handleSubmit =  async(e) => {
         e.preventDefault();
         console.log(postData);
-        if(currentId === 0)
-        dispatch(createPost(postData));
-        else{
-            dispatch(updatePost(postData._id,postData));
-        }
+        if(currentId === 0) await dispatch(createPost(postData));
+        else await dispatch(updatePost(postData._id,postData));
         clear();
     }
 
