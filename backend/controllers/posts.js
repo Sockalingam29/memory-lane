@@ -1,4 +1,9 @@
+import express from 'express';
+import mongoose from 'mongoose';
+
 import Post from "../models/postModel.js";
+
+const router = express.Router();
 
 export const getPosts = async (req,res)=>{
     try{
@@ -73,3 +78,5 @@ export const updatePost = async (req,res) =>{
         });
     }
 }
+
+export default router;

@@ -10,8 +10,6 @@ export default function newPostForm({currentId, setCurrentId}){
     const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
     useEffect(() => {
-        console.log("useEffect");
-        console.log(post);
         if (post) setPostData(post);
       }, [post]);
 
