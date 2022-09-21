@@ -18,11 +18,12 @@ export default function posts({setCurrentId}){
             <Row>
                 {posts.map((data)=>{
                     return(
-                        <Col  className="mb-3" xs={12} md={6} lg={6}>
+                        <Col  className="mb-3" md={6} xxl={4} >
                             <PostCard currPost={data} setCurrentId={setCurrentId}  />
                         </Col>
                     )
                 })}
+
             </Row>
         </Container>
     )
