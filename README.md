@@ -8,6 +8,8 @@ Functionalities:
 - User can update the posts.
 
 Works in progress:
+- Creating profiles for users along with authentication.
 - Improving loading speed.
 - Removing the image from the form once the post is created.
 - Displaying a spinner until the page is loaded with the updated information.
+- Displaying an error message if the uploaded image is more than the limit.
