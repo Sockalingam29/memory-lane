@@ -1,7 +1,7 @@
-import React from 'react';
-import NavbarMenu from './components/navbar';
-import Auth from './components/auth';
-import Home from './components/home';
+import React from "react";
+import NavbarMenu from "./components/navbar";
+import Auth from "./components/Auth/auth";
+import Home from "./components/home";
 
 import {
   createBrowserRouter,
@@ -19,11 +19,8 @@ function App() {
       </Route>
     )
   );
-  
-  return (
-    <RouterProvider router={router} />
 
-  )  
+  return <RouterProvider router={router} />;
 }
 
 export default App;
