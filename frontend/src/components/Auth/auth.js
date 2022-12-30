@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 import {
   GoogleOAuthProvider,
   GoogleLogin,
-  googleLogout,
 } from "@react-oauth/google";
-import { useGoogleLogin } from "@react-oauth/google";
+
 import jwt_decode from "jwt-decode";
-// import { signin, signup } from "../../actions/auth";
+import { signin, signup } from "../../actions/auth";
 
 import Input from "./input";
 
@@ -24,26 +23,31 @@ export default function auth() {
   const ClientId = process.env.REACT_APP_CLIENT_ID;
 
   const inputChangeHandler = (e) => {
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if ([e.target.name] == "Confirm Password")
-      if (e.target.value != formData.Password) setPasswordMatch(false);
-      else setPasswordMatch(true);
-    if ([e.target.name] == "Password")
-      if (e.target.value != formData["Confirm Password"])
-        setPasswordMatch(false);
-      else setPasswordMatch(true);
+    if (isSignup) {
+      if ([e.target.name] == "confirmPassword")
+        if (e.target.value != formData.password) setPasswordMatch(false);
+        else setPasswordMatch(true);
+      if ([e.target.name] == "password")
+        if (e.target.value != formData.confirmPassword)
+          setPasswordMatch(false);
+        else setPasswordMatch(true);
+    }
   };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (passwordMatch) {
-      if (isSignup) {
-        // dispatch(signup(formData, navigate));
-      } else {
-        // dispatch(signin(formData, navigate));
+    if (isSignup) {
+      if (passwordMatch) {
+        dispatch(signup(formData, navigate));
       }
-    } else if (passwordMatch == false) {
-      return alert("Passwords don't match!");
+      else if (passwordMatch == false) {
+        return alert("Passwords don't match!");
+      }
+    }
+    else {
+      dispatch(signin(formData, navigate));
     }
   };
 
@@ -56,24 +60,28 @@ export default function auth() {
       <h2 className="mb-3 text-center">{isSignup ? "Sign-up" : "Sign-in"}</h2>
       {isSignup && (
         <Input
-          name="Name"
+          label="Name"
+          name="name"
           type="text"
           inputChangeHandler={inputChangeHandler}
         />
       )}
       <Input
-        name="Email"
+        label="Email"
+        name="email"
         type="email"
         inputChangeHandler={inputChangeHandler}
       />
       <Input
-        name="Password"
+        label="Password"
+        name="password"
         type="password"
         inputChangeHandler={inputChangeHandler}
       />
       {isSignup && (
         <Input
-          name="Confirm Password"
+          label="Confirm Password"
+          name="confirmPassword"
           type="password"
           inputChangeHandler={inputChangeHandler}
           passwordMatch={passwordMatch}
@@ -113,7 +121,7 @@ export default function auth() {
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               const res = credentialResponse.credential;
-              const user = jwt_decode(res);
+              const user = { result: jwt_decode(res), token: res.credential };
               dispatch({ type: "AUTH", data: user });
               navigate("/");
             }}
