@@ -37,12 +37,12 @@ export default function navbar() {
           <Navbar.Collapse className="justify-content-end">
             {user && (
               <Navbar.Text className="me-4 p-0">
-                {user.name}
-                <img
+                {user.result.name}
+                {user.result.picture && <img
                   className="border rounded-circle ms-2"
                   style={{ width: "32px" }}
-                  src={user.picture}
-                ></img>
+                  src={user.result.picture}
+                ></img>}
               </Navbar.Text>
             )}
             {user ? (
