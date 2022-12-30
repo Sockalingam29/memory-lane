@@ -10,25 +10,76 @@ import {
 } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+// import { signin, signup } from "../../actions/auth";
 
 import Input from "./input";
 
 export default function auth() {
   const [isSignup, setIsSignup] = useState(true);
+  const [formData, setFormData] = useState({});
+  const [passwordMatch, setPasswordMatch] = useState();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const ClientId=process.env.REACT_APP_CLIENT_ID;
+  const ClientId = process.env.REACT_APP_CLIENT_ID;
+
+  const inputChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if ([e.target.name] == "Confirm Password")
+      if (e.target.value != formData.Password) setPasswordMatch(false);
+      else setPasswordMatch(true);
+    if ([e.target.name] == "Password")
+      if (e.target.value != formData["Confirm Password"])
+        setPasswordMatch(false);
+      else setPasswordMatch(true);
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (passwordMatch) {
+      if (isSignup) {
+        // dispatch(signup(formData, navigate));
+      } else {
+        // dispatch(signin(formData, navigate));
+      }
+    } else if (passwordMatch == false) {
+      return alert("Passwords don't match!");
+    }
+  };
 
   return (
     <Form
       className="m-md-auto m-2 p-4 shadow-lg border border-1 rounded-3"
       style={{ maxWidth: "460px", backgroundColor: "#CFD2CF" }}
+      onSubmit={formSubmitHandler}
     >
       <h2 className="mb-3 text-center">{isSignup ? "Sign-up" : "Sign-in"}</h2>
-      {isSignup && <Input name="Name" type="text" />}
-      <Input name="Email" type="email" />
-      <Input name="Password" type="password" />
-      {isSignup && <Input name="Confirm Password" type="password" />}
+      {isSignup && (
+        <Input
+          name="Name"
+          type="text"
+          inputChangeHandler={inputChangeHandler}
+        />
+      )}
+      <Input
+        name="Email"
+        type="email"
+        inputChangeHandler={inputChangeHandler}
+      />
+      <Input
+        name="Password"
+        type="password"
+        inputChangeHandler={inputChangeHandler}
+      />
+      {isSignup && (
+        <Input
+          name="Confirm Password"
+          type="password"
+          inputChangeHandler={inputChangeHandler}
+          passwordMatch={passwordMatch}
+        />
+      )}
+
       <Button variant="primary" type="submit" className="w-100 mb-3">
         {isSignup ? "Sign-up" : "Sign-in"}
       </Button>
