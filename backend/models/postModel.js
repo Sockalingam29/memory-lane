@@ -4,9 +4,9 @@ const postsSchema = new mongoose.Schema({
     title:String,
     content:String,
     author:String,
-    noOfLikes:{
-        type:Number,
-        default:0
+    likes:{
+        type:[String],
+        default:[]
     },
     tags:[String],
     selectedFile:String,

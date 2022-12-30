@@ -1,15 +1,15 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 
-function input({ name, type, inputChangeHandler, passwordMatch }) {
+function input({ name, label, type, inputChangeHandler, passwordMatch }) {
   return (
     <Form.Group className="mb-3">
-      <Form.Label>{name}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       <Form.Control
         onChange={inputChangeHandler}
         name={name}
         type={type}
-        placeholder={name}
+        placeholder={label}
         required
       />
       {passwordMatch && (

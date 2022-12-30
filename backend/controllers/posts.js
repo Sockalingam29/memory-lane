@@ -54,8 +54,19 @@ export const deletePost = async(req,res)=>{
 export const likePost = async (req,res) =>{
     try{
         const {id}=req.params;
+        const userId=req.userId
+        if(!userId){
+            res.status(400).json({message:'Unauthenticated user'})
+        }
         const post =await Post.findById(id);
-        const updatedPost=await Post.findByIdAndUpdate(id,{noOfLikes:post.noOfLikes+1},{new:true});
+        const index = post.likes.findIndex((id) => id === String(userId));
+        if(index===-1){
+            post.likes.push(userId)
+        }
+        else{
+            post.likes = post.likes.filter((id) => id !== String(userId));
+        }
+        const updatedPost=await Post.findByIdAndUpdate(id,post,{new:true});
         res.status(200).json({updatedPost})
     }catch(err){
         res.status(500).json({

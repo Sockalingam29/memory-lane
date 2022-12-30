@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import postRoutes from "./routes/posts.js"
+import userRoutes from "./routes/users.js"
 import dotenv from "dotenv";
 
 const app=express();
@@ -14,6 +15,7 @@ app.use(cors());
 
 
 app.use("/posts",postRoutes);
+app.use('/user',userRoutes);
 
 app.get("/",(req,res)=>{
     res.send("Hello to memories api");
@@ -21,8 +23,8 @@ app.get("/",(req,res)=>{
 
 const PORT = process.env.PORT || 5000;
 
-console.log("Port above");
+console.log("Port running");
 
 mongoose.connect(process.env.CONNECTION_URL)
-    .then(()=>app.listen(PORT,()=>console.log("Port running")))
+    .then(()=>app.listen(PORT,()=>console.log("Database connected")))
     .catch((err)=>console.log(err));
