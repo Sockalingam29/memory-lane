@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import { Link } from "react-router-dom";
 import { createPost, updatePost } from "../actions/posts";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,26 +9,15 @@ export default function newPostForm({ currentId, setCurrentId }) {
   const [postData, setPostData] = useState({
     title: "",
     content: "",
-    author: "",
     tags: [],
     selectedFile: "",
   });
-  const [isUpload, setIsUpload] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  const handleUpload = (file) => {
-    var reader = new FileReader();
-
-    reader.onprogress = (e) => {
-      setProgress((e.loaded / e.total) * 100);
-    };
-    console.log(progress);
-    reader.readAsArrayBuffer(file);
-  };
 
   const post = useSelector((state) =>
     currentId ? state.posts.find((message) => message._id === currentId) : null
   );
+
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -36,12 +26,10 @@ export default function newPostForm({ currentId, setCurrentId }) {
   const dispatch = useDispatch();
 
   const clear = () => {
-    setIsUpload(false);
     setCurrentId(0);
     setPostData({
       title: "",
       content: "",
-      author: "",
       tags: [],
       selectedFile: "",
     });
@@ -50,8 +38,8 @@ export default function newPostForm({ currentId, setCurrentId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(postData);
-    if (currentId === 0) await dispatch(createPost(postData));
-    else await dispatch(updatePost(postData._id, postData));
+    if (currentId === 0) await dispatch(createPost({...postData, authorName: user.result.name}));
+    else await dispatch(updatePost(postData._id, {...postData, authorName: user.result.name}));
     clear();
   };
 
@@ -62,11 +50,18 @@ export default function newPostForm({ currentId, setCurrentId }) {
       return alert("File size too large. It will not be uploaded.");
     else {
       console.log(base64);
-      setIsUpload(true);
-      setIsUpload((prev) => console.log(prev));
       setPostData({ ...postData, selectedFile: base64 });
     }
   };
+
+  if(user==null)
+  return (
+    <div>
+      <h2 className="text-center">Add your memory!</h2>
+      <p className="text-center">Please <Link to = "/auth">login </Link>to add your memories</p>
+      
+    </div>
+  )
 
   return (
     <div>
@@ -83,22 +78,6 @@ export default function newPostForm({ currentId, setCurrentId }) {
               setPostData({
                 ...postData,
                 title: e.target.value,
-              })
-            }
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-2" controlId="postAuthor">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            autoComplete="new-password"
-            type="text"
-            placeholder="Enter your name"
-            value={postData["author"]}
-            onChange={(e) =>
-              setPostData({
-                ...postData,
-                author: e.target.value,
               })
             }
           />

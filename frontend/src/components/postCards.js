@@ -10,11 +10,11 @@ import { likePost, deletePost } from '../actions/posts';
 
 export default function postCards({currPost, setCurrentId}){
     const dispatch = useDispatch();
-    
+
     return(
             <Card style={{background:"",boxShadow:"20px"}}>
                 <Card.ImgOverlay className="cardAction">
-                    <Card.Text>{currPost.author}</Card.Text>
+                    <Card.Text>{currPost.authorName}</Card.Text>
                     <div onClick={()=>setCurrentId(currPost._id)}><img src={editIcon} alt="Edit" className="actionBtn" /></div>
                 </Card.ImgOverlay>  
                 <Card.Img variant="top" src={currPost.selectedFile} alt={"Cover image"} />

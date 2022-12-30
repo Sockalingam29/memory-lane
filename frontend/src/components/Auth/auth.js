@@ -121,7 +121,7 @@ export default function auth() {
           <GoogleLogin
             onSuccess={(credentialResponse) => {
               const res = credentialResponse.credential;
-              const user = { result: jwt_decode(res), token: res.credential };
+              const user = { result: jwt_decode(res), token: res };
               dispatch({ type: "AUTH", data: user });
               navigate("/");
             }}
