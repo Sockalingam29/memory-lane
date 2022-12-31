@@ -11,7 +11,7 @@
     justify-content:space-between;
 }
 .actionBtn{
+    vertical-align: top;
     width:20px;
     cursor: pointer;
-    vertical-align:baseline;
 }

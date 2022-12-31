@@ -4,12 +4,13 @@ import likeIcon from '../images/like.png';
 import deleteIcon from '../images/garbage.png';
 import editIcon from '../images/editing.png';
 import '../styles/postCards.css';
-import placeholder from '../images/placeholder.jpg';
+import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { likePost, deletePost } from '../actions/posts';
 
-export default function postCards({currPost, setCurrentId}){
+export default function postCards({currPost, setCurrentId, user}){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return(
             <Card style={{background:"",boxShadow:"20px"}}>
@@ -32,10 +33,12 @@ export default function postCards({currPost, setCurrentId}){
                     {currPost.content}
                     </Card.Text>
                     <Card.Text className='cardAction'>
+                    
                     <div>
-                        <img className="actionBtn" alt="Like" src={likeIcon} onClick={() => dispatch(likePost(currPost._id))}/>
-                        <small>{' '}{currPost.noOfLikes}</small>
+                        <img className="actionBtn" alt="Like" src={likeIcon} onClick={() => user!=null ? dispatch(likePost(currPost._id)) : navigate("/auth")}/>
+                        <small className='align-bottom'>{' '}{currPost.likes.length}</small>
                     </div>
+                    
                     <div>
                         <img className='actionBtn' onClick={() => dispatch(deletePost(currPost._id))} alt="Delete" src={deleteIcon}/>
                     </div>
