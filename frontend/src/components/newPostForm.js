@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import { Link, useNavigate,useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createPost, updatePost } from "../actions/posts";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function newPostForm({ currentId, setCurrentId }) {
-  const navigate = useNavigate()
-  const location = useLocation();
 
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const user = useSelector((state) => state.auth.authData);
 
   const [postData, setPostData] = useState({
     title: "",
@@ -25,10 +23,6 @@ export default function newPostForm({ currentId, setCurrentId }) {
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
 
   const dispatch = useDispatch();
 

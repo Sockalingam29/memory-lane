@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { googleLogout } from "@react-oauth/google";
 
 export default function navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const location = useLocation();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
-  useEffect(() => {
-    const mail = user !== null ? user.email : null;
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  const user = useSelector((state) => state.auth.authData);
+
 
   return (
     <div style={{ background: "#CFD2CF", minHeight: "100vh" }}>
@@ -51,7 +47,6 @@ export default function navbar() {
                 onClick={() => {
                   googleLogout();
                   dispatch({ type: "LOGOUT" });
-                  setUser(null);
                   navigate("/");
                 }}
               >

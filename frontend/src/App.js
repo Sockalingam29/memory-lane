@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavbarMenu from "./components/navbar";
 import Auth from "./components/Auth/auth";
 import Home from "./components/home";
+import { useDispatch } from "react-redux";
 
 import {
   createBrowserRouter,
@@ -11,6 +12,12 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({type:'FETCH_AUTH'})
+  }, [])
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<NavbarMenu />}>
