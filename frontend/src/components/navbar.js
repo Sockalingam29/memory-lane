@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container, Navbar, Button } from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { googleLogout } from "@react-oauth/google";
+import decode from "jwt-decode";
 
 export default function navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
   const user = useSelector((state) => state.auth.authData);
+
+  useEffect(() => {
+    const token = user != null ? user.token : null;
+    console.log(token)
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime())
+        dispatch({ type: "LOGOUT" })
+    }
+  }, [user])
 
 
   return (
