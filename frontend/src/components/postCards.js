@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Badge } from 'react-bootstrap';
 import likeIcon from '../images/like.png';
+import likeFillIcon from '../images/like-fill.png';
 import deleteIcon from '../images/garbage.png';
 import editIcon from '../images/editing.png';
 import '../styles/postCards.css';
@@ -12,7 +13,20 @@ export default function postCards({ currPost, setCurrentId, user }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isAuthor = user != null ? (user.result.sub === currPost.author || user.result._id === currPost.author) : false;
+    const [isLiked,setIsLiked] = useState(user != null ? (currPost.likes.find((like) => like === user.result.sub || like === user.result._id)) : false);
+    const [likeCount, setLikeCount] = useState(currPost.likes.length);
 
+    const likeHandler = () => {
+        if (user!=null) {
+            setIsLiked(!isLiked);
+            setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
+            dispatch(likePost(currPost._id));
+        } else {
+            navigate('/auth');
+        }
+    }
+
+    
     return (
         <Card style={{ background: "", boxShadow: "20px" }}>
             <Card.ImgOverlay className="cardAction">
@@ -36,8 +50,8 @@ export default function postCards({ currPost, setCurrentId, user }) {
                 <Card.Text className='cardAction'>
 
                     <div>
-                        <img className="actionBtn" alt="Like" src={likeIcon} onClick={() => user != null ? dispatch(likePost(currPost._id)) : navigate("/auth")} />
-                        <small className='align-bottom'>{' '}{currPost.likes.length}</small>
+                        <img className="actionBtn" alt="Like" src={isLiked ? likeFillIcon : likeIcon} onClick={ likeHandler }/>
+                        <small className='align-bottom'>{' '}{likeCount}</small>
                     </div>
 
                     {isAuthor && <div>

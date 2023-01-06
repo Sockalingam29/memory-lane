@@ -57,7 +57,7 @@ export default function navbar() {
                 onClick={() => {
                   googleLogout();
                   dispatch({ type: "LOGOUT" });
-                  navigate("/");
+                  navigate("/auth");
                 }}
               >
                 Logout
