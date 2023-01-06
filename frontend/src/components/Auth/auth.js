@@ -17,6 +17,7 @@ export default function auth() {
   const [isSignup, setIsSignup] = useState(true);
   const [formData, setFormData] = useState({});
   const [passwordMatch, setPasswordMatch] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,14 +41,22 @@ export default function auth() {
     e.preventDefault();
     if (isSignup) {
       if (passwordMatch) {
-        dispatch(signup(formData, navigate));
+        setIsLoading(true);
+        dispatch(signup(formData, navigate))
+          .then((res) => {
+            setIsLoading(false);
+          })
       }
       else if (passwordMatch == false) {
         return alert("Passwords don't match!");
       }
     }
     else {
-      dispatch(signin(formData, navigate));
+      setIsLoading(true);
+      dispatch(signin(formData, navigate))
+        .then((res) => {
+          setIsLoading(false);
+        })
     }
   };
 
@@ -88,8 +97,8 @@ export default function auth() {
         />
       )}
 
-      <Button variant="primary" type="submit" className="w-100 mb-3">
-        {isSignup ? "Sign-up" : "Sign-in"}
+      <Button variant="dark" type="submit" className="w-100 mb-3" disabled={isLoading}>
+        {isLoading ? "Loading..." : isSignup ? "Sign-up" : "Sign-in"}
       </Button>
       {isSignup && (
         <div className="mb-3 m-auto text-center">

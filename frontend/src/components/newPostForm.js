@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function newPostForm({ currentId, setCurrentId }) {
 
   const user = useSelector((state) => state.auth.authData);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -37,11 +37,14 @@ export default function newPostForm({ currentId, setCurrentId }) {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     console.log(postData);
+
     if (currentId === 0) await dispatch(createPost({...postData, authorName: user.result.name}));
     else await dispatch(updatePost(postData._id, {...postData, authorName: user.result.name}));
     clear();
+    setIsLoading(false);
   };
 
   const handleFileUpload = (base64) => {
@@ -127,10 +130,10 @@ export default function newPostForm({ currentId, setCurrentId }) {
           />
         </Form.Group>
 
-        <Button className="w-100 mb-2" variant="dark" type="submit">
-          Submit
+        <Button className="w-100 mb-2" variant="dark" type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Submit"}
         </Button>
-        <Button className="w-100 mb-2" variant="secondary" onClick={clear}>
+        <Button className="w-100 mb-2" variant="secondary" onClick={clear} disabled={isLoading}>
           Clear
         </Button>
       </Form>
