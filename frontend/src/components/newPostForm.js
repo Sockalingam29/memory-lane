@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { createPost, updatePost } from "../actions/posts";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 
 export default function newPostForm({ currentId, setCurrentId }) {
 
@@ -45,6 +46,17 @@ export default function newPostForm({ currentId, setCurrentId }) {
     else await dispatch(updatePost(postData._id, {...postData, authorName: user.result.name}));
     clear();
     setIsLoading(false);
+    toast("Post added successfully",  {
+      type:"success",
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
 
   const handleFileUpload = (base64) => {

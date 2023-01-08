@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { googleLogout } from "@react-oauth/google";
 import decode from "jwt-decode";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function navbar() {
   const dispatch = useDispatch();
@@ -71,6 +73,7 @@ export default function navbar() {
         </Container>
       </Navbar>
       <Outlet />
+      <ToastContainer />
     </div>
   );
 }
