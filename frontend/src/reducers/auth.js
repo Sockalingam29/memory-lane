@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { AUTH, LOGOUT, FETCH_AUTH } from '../constants/actionTypes';
 
 export default (state = {authData:null} , action) => {
@@ -10,6 +11,12 @@ export default (state = {authData:null} , action) => {
         return { ...state, authData: JSON.parse(localStorage.getItem("profile")) };
     case LOGOUT:
         localStorage.clear();
+        toast("Logged out successfully", {
+          type: "success",
+          position: "top-center",
+          autoClose: 1000,
+          theme: "dark"
+        });
         return { ...state, authData: null };
     default:
       return state;

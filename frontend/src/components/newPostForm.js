@@ -41,22 +41,10 @@ export default function newPostForm({ currentId, setCurrentId }) {
     setIsLoading(true);
     e.preventDefault();
     console.log(postData);
-
-    if (currentId === 0) await dispatch(createPost({...postData, authorName: user.result.name}));
-    else await dispatch(updatePost(postData._id, {...postData, authorName: user.result.name}));
+    if (currentId === 0) await dispatch(createPost({ ...postData, authorName: user.result.name }));
+    else await dispatch(updatePost(postData._id, { ...postData, authorName: user.result.name }));
     clear();
     setIsLoading(false);
-    toast("Post added successfully",  {
-      type:"success",
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
   };
 
   const handleFileUpload = (base64) => {
@@ -70,14 +58,14 @@ export default function newPostForm({ currentId, setCurrentId }) {
     }
   };
 
-  if(user==null)
-  return (
-    <div>
-      <h2 className="text-center">Add your memory!</h2>
-      <p className="text-center">Please <Link to = "/auth">login </Link>to add your memories</p>
-      
-    </div>
-  )
+  if (user == null)
+    return (
+      <div>
+        <h2 className="text-center">Add your memory!</h2>
+        <p className="text-center">Please <Link to="/auth">login </Link>to add your memories</p>
+
+      </div>
+    )
 
   return (
     <div>
