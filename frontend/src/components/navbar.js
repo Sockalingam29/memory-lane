@@ -38,7 +38,7 @@ export default function navbar() {
               className="d-inline-block align-top"
             />
             {"  "}
-            Memories
+            Memory-lane
           </Navbar.Brand>
           <Navbar.Toggle />
 
