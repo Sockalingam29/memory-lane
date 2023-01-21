@@ -44,7 +44,7 @@ export default function navbar() {
 
           <Navbar.Collapse className="justify-content-end">
             {user && (
-              <Navbar.Text style={{ textAlign: "right" }} className="me-4 p-0 overflow-hidden">
+              <Navbar.Text onClick={() => navigate("/my-posts")} style={{ textAlign: "right", cursor: "pointer" }} className="me-4 overflow-hidden">
                 {user.result.name}
                 {user.result.picture && <img
                   className="border rounded-circle ms-2"

@@ -9,10 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { likePost, deletePost } from '../actions/posts';
 
-export default function postCards({ currPost, setCurrentId, user }) {
+export default function postCards({ isAuthor, currPost, setCurrentId, user }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isAuthor = user != null ? (user.result.sub === currPost.author || user.result._id === currPost.author) : false;
     const [isLiked, setIsLiked] = useState(user != null ? (currPost.likes.find((like) => like === user.result.sub || like === user.result._id)) : false);
     const [likeCount, setLikeCount] = useState(currPost.likes.length);
 

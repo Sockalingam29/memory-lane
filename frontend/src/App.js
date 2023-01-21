@@ -23,6 +23,7 @@ function App() {
       <Route path="/" element={<NavbarMenu />}>
         <Route index element={<Home />} />
         <Route path="auth" element={<Auth />} />
+        <Route path="my-posts" element={<Home isProfile={true}/>} />
       </Route>
     )
   );
