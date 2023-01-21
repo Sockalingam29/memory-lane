@@ -62,8 +62,8 @@ export default function auth() {
 
   return (
     <Form
-      className="m-md-auto m-2 p-4 shadow-lg border border-1 rounded-3"
-      style={{ maxWidth: "460px", backgroundColor: "#CFD2CF" }}
+      className="m-md-auto m-2 p-4 rounded"
+      style={{ maxWidth: "460px", boxShadow: " 8px 8px 16px #1c1f23,-8px -8px 16px #262b2f" }}
       onSubmit={formSubmitHandler}
     >
       <h2 className="mb-3 text-center">{isSignup ? "Sign-up" : "Sign-in"}</h2>
@@ -97,7 +97,7 @@ export default function auth() {
         />
       )}
 
-      <Button variant="dark" type="submit" className="w-100 mb-3" disabled={isLoading}>
+      <Button variant="outline-light" type="submit" className="w-100 mb-3" disabled={isLoading}>
         {isLoading ? "Loading..." : isSignup ? "Sign-up" : "Sign-in"}
       </Button>
       {isSignup && (

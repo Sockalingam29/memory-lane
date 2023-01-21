@@ -62,7 +62,7 @@ export default function newPostForm({ currentId, setCurrentId }) {
     return (
       <div>
         <h2 className="text-center">Add your memory!</h2>
-        <p className="text-center">Please <Link to="/auth">login </Link>to add your memories</p>
+        <p className="text-center">Please <Link style={{ color: "white", textDecorationColor: "white" }} to="/auth">login</Link> to add your memories</p>
 
       </div>
     )
@@ -130,7 +130,7 @@ export default function newPostForm({ currentId, setCurrentId }) {
           />
         </Form.Group>
 
-        <Button className="w-100 mb-2" variant="dark" type="submit" disabled={isLoading}>
+        <Button className="w-100 mb-2" variant="outline-light" type="submit" disabled={isLoading}>
           {isLoading ? "Loading..." : "Submit"}
         </Button>
         <Button className="w-100 mb-2" variant="secondary" onClick={clear} disabled={isLoading}>

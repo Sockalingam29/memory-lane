@@ -26,8 +26,8 @@ export default function navbar() {
 
 
   return (
-    <div style={{ background: "#CFD2CF", minHeight: "100vh" }}>
-      <Navbar bg="dark" variant="dark" className="mb-4">
+    <div style={{ background: "#212529", minHeight: "100vh" }}>
+      <Navbar bg="black" variant="dark" className="mb-4 shadow-lg" >
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -44,7 +44,7 @@ export default function navbar() {
 
           <Navbar.Collapse className="justify-content-end">
             {user && (
-              <Navbar.Text className="me-4 p-0">
+              <Navbar.Text style={{ textAlign: "right" }} className="me-4 p-0 overflow-hidden">
                 {user.result.name}
                 {user.result.picture && <img
                   className="border rounded-circle ms-2"
