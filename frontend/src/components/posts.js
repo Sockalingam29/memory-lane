@@ -5,7 +5,7 @@ import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import '../styles/posts.css';
 
-export default function posts({ isProfile, setCurrentId }) {
+export default function posts({ setShow, isProfile, setCurrentId }) {
     const posts = useSelector((state) => state.posts);
     const user = useSelector((state) => state.auth.authData);
 
@@ -24,8 +24,8 @@ export default function posts({ isProfile, setCurrentId }) {
                         const isAuthor = user != null ? (user.result.sub === data.author || user.result._id === data.author) : false;
                         if (isProfile && !isAuthor) return null;
                         return (
-                            <Col className="mb-3" md={6} xxl={4} >
-                                <PostCard isAuthor={isAuthor} currPost={data} setCurrentId={setCurrentId} user={user} />
+                            <Col className="mb-3" md={4} xxl={3} >
+                                <PostCard setShow={setShow} isAuthor={isAuthor} currPost={data} setCurrentId={setCurrentId} user={user} />
                             </Col>
                         )
                     })}

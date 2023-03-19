@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { likePost, deletePost } from '../actions/posts';
 
-export default function postCards({ isAuthor, currPost, setCurrentId, user }) {
+export default function postCards({ setShow, isAuthor, currPost, setCurrentId, user }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(user != null ? (currPost.likes.find((like) => like === user.result.sub || like === user.result._id)) : false);
@@ -30,7 +30,10 @@ export default function postCards({ isAuthor, currPost, setCurrentId, user }) {
         <Card bg="dark" className="rounded mx-2" style={{ boxShadow: " 8px 8px 16px #1c1f23,-8px -8px 16px #262b2f" }} >
             <Card.ImgOverlay className="cardAction">
                 <Card.Text>{currPost.authorName}</Card.Text>
-                {isAuthor && <div onClick={() => setCurrentId(currPost._id)}><img src={editIcon} alt="Edit" className="actionBtn" /></div>}
+                {isAuthor && <div onClick={() => {
+                    setCurrentId(currPost._id)
+                    setShow(true)
+                }}><img src={editIcon} alt="Edit" className="actionBtn" /></div>}
             </Card.ImgOverlay>
             <Card.Img variant="top" className="rounded-top" src={currPost.selectedFile} alt={"Cover image"} />
 

@@ -1,0 +1,8 @@
+#createPostIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #000000;
+  box-shadow: 8px 8px 16px #1c1f23, -8px -8px 16px #262b2f;
+}
