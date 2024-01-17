@@ -10,7 +10,7 @@ A MERN stack social media web app that helps in posting our memories.
 - **Primary tech stack:** ReactJS is used to build the frontend of the web app, Bootstrap is used for styling the UI, Express.js and NodeJS for the backend, and MongoDB for data storage.
 - **Authentication:** JSON Web Tokens (JWT) are used for authentication, with tokens set to expire in 1 hour. Users' passwords are stored securely using bcrypt.
 - **State management:** Redux is used to maintain a global store that helps in state management. Redux-thunk allows for dispatching async actions like API calls.
-- **Toast notifications:** Toast notifications are displayed when posts are created or delted sucessfully. Its also used to display errors that may occur during signin or creation of posts.
+- **Toast notifications:** Toast notifications are displayed when posts are created or deleted sucessfully. Its also used to display errors that may occur during signin or creation of posts.
 - **Routing:** React router is used for client-side routing between pages.
 - **Google Login:** Google login is implemented using @react-oauth/google npm package, which is based on the new Google Identity Services SDK. 
 - **Uploading images:** Images are uploaded using react-filebase64 npm package, which converts the uploaded image to base64 format.
